@@ -88,80 +88,84 @@
         /* --- 自動化資料庫：我幫你填好了食材 --- */
         /* 注意：圖片部分 (image) 請你自己把照片放進 images 資料夾，並修改檔名 */
         const menuData = [
-            // 甜點類
-            { id: 1, category: "甜點", name: "肉桂捲", image: "images/cinnamon.jpg", ingredients: ["麵粉", "肉桂粉", "黑糖", "奶油", "核桃"] },
-            { id: 2, category: "甜點", name: "千層蛋糕", image: "images/crepe.jpg", ingredients: ["雞蛋", "牛奶", "低筋麵粉", "鮮奶油", "糖"] },
-            { id: 3, category: "甜點", name: "古早味蛋糕", image: "images/sponge_cake.jpg", ingredients: ["雞蛋", "麵粉", "植物油", "牛奶", "糖"] },
-            { id: 4, category: "甜點", name: "生乳捲", image: "images/roll_cake.jpg", ingredients: ["鮮奶油", "雞蛋", "麵粉", "蜂蜜"] },
-            { id: 5, category: "甜點", name: "巴斯克乳酪蛋糕", image: "images/basque.jpg", ingredients: ["奶油乳酪", "鮮奶油", "雞蛋", "糖", "低筋麵粉"] },
-            { id: 6, category: "甜點", name: "香蕉燕麥蛋糕", image: "images/banana_oat.jpg", ingredients: ["香蕉", "燕麥", "雞蛋", "牛奶", "泡打粉"] },
-            { id: 7, category: "甜點", name: "瑞士卷", image: "images/swiss_roll.jpg", ingredients: ["雞蛋", "果醬", "麵粉", "鮮奶油"] },
-            { id: 8, category: "甜點", name: "蘋果派(米紙版)", image: "images/apple_pie.jpg", ingredients: ["蘋果", "越南米紙", "肉桂粉", "奶油", "代糖"] },
-            { id: 9, category: "甜點", name: "饅頭", image: "images/bun.jpg", ingredients: ["中筋麵粉", "酵母", "糖", "水"] },
-            { id: 10, category: "甜點", name: "貝果", image: "images/bagel.jpg", ingredients: ["高筋麵粉", "酵母", "糖", "鹽", "水"] },
-            { id: 11, category: "甜點", name: "香蕉煎餅", image: "images/banana_pancake.jpg", ingredients: ["香蕉", "麵粉", "雞蛋", "牛奶"] },
-            { id: 12, category: "甜點", name: "杏仁瓦片", image: "images/almond_crisp.jpg", ingredients: ["杏仁片", "蛋白", "糖", "奶油", "麵粉"] },
-            { id: 13, category: "甜點", name: "鮮奶酪", image: "images/panna_cotta.jpg", ingredients: ["牛奶", "鮮奶油", "吉利丁", "糖"] },
-            { id: 14, category: "甜點", name: "烤布丁", image: "images/pudding.jpg", ingredients: ["雞蛋", "牛奶", "糖", "香草精"] },
-            { id: 15, category: "甜點", name: "豆花", image: "images/tofu_pudding.jpg", ingredients: ["豆漿", "豆花粉", "花生", "糖水"] },
-            { id: 16, category: "甜點", name: "優格碗", image: "images/yogurt.jpg", ingredients: ["希臘優格", "藍莓", "蜂蜜", "堅果"] },
+            // --- 甜點類 (Desserts) ---
+            { id: 1, category: "甜點", name: "肉桂捲", image: "https://loremflickr.com/300/200/cinnamon,roll/all", ingredients: ["麵粉", "肉桂粉", "黑糖", "奶油", "核桃"] },
+            { id: 2, category: "甜點", name: "千層蛋糕", image: "https://loremflickr.com/300/200/mille,crepe,cake/all", ingredients: ["雞蛋", "牛奶", "低筋麵粉", "鮮奶油", "糖"] },
+            { id: 3, category: "甜點", name: "古早味蛋糕", image: "https://loremflickr.com/300/200/sponge,cake/all", ingredients: ["雞蛋", "麵粉", "植物油", "牛奶", "糖"] },
+            { id: 4, category: "甜點", name: "生乳捲", image: "https://loremflickr.com/300/200/swiss,roll,cream/all", ingredients: ["鮮奶油", "雞蛋", "麵粉", "蜂蜜"] },
+            { id: 5, category: "甜點", name: "巴斯克乳酪蛋糕", image: "https://loremflickr.com/300/200/basque,cheesecake/all", ingredients: ["奶油乳酪", "鮮奶油", "雞蛋", "糖", "低筋麵粉"] },
+            { id: 6, category: "甜點", name: "香蕉燕麥蛋糕", image: "https://loremflickr.com/300/200/banana,oat,cake/all", ingredients: ["香蕉", "燕麥", "雞蛋", "牛奶", "泡打粉"] },
+            { id: 7, category: "甜點", name: "瑞士卷", image: "https://loremflickr.com/300/200/swiss,roll/all", ingredients: ["雞蛋", "果醬", "麵粉", "鮮奶油"] },
+            { id: 8, category: "甜點", name: "蘋果派", image: "https://loremflickr.com/300/200/apple,pie/all", ingredients: ["蘋果", "肉桂粉", "奶油", "代糖", "派皮"] },
+            { id: 9, category: "甜點", name: "饅頭", image: "https://loremflickr.com/300/200/steamed,bun/all", ingredients: ["中筋麵粉", "酵母", "糖", "水"] },
+            { id: 10, category: "甜點", name: "貝果", image: "https://loremflickr.com/300/200/bagel/all", ingredients: ["高筋麵粉", "酵母", "糖", "鹽", "水"] },
+            { id: 11, category: "甜點", name: "香蕉煎餅", image: "https://loremflickr.com/300/200/banana,pancake/all", ingredients: ["香蕉", "麵粉", "雞蛋", "牛奶"] },
+            { id: 12, category: "甜點", name: "杏仁瓦片", image: "https://loremflickr.com/300/200/almond,cookie/all", ingredients: ["杏仁片", "蛋白", "糖", "奶油", "麵粉"] },
+            { id: 13, category: "甜點", name: "鮮奶酪", image: "https://loremflickr.com/300/200/panna,cotta/all", ingredients: ["牛奶", "鮮奶油", "吉利丁", "糖"] },
+            { id: 14, category: "甜點", name: "烤布丁", image: "https://loremflickr.com/300/200/flan,pudding/all", ingredients: ["雞蛋", "牛奶", "糖", "香草精"] },
+            { id: 15, category: "甜點", name: "豆花", image: "https://loremflickr.com/300/200/tofu,pudding/all", ingredients: ["豆漿", "豆花粉", "花生", "糖水"] },
+            { id: 16, category: "甜點", name: "優格碗", image: "https://loremflickr.com/300/200/yogurt,fruit/all", ingredients: ["希臘優格", "藍莓", "蜂蜜", "堅果"] },
 
-            // 異國料理
-            { id: 20, category: "異國料理", name: "肉骨茶", image: "images/bak_kut_teh.jpg", ingredients: ["排骨", "蒜頭", "肉骨茶包", "醬油", "白胡椒"] },
-            { id: 21, category: "異國料理", name: "打拋豬", image: "images/thai_pork.jpg", ingredients: ["豬絞肉", "九層塔", "辣椒", "蒜頭", "魚露", "檸檬"] },
-            { id: 22, category: "異國料理", name: "泰式綠咖哩雞", image: "images/green_curry.jpg", ingredients: ["綠咖哩醬", "椰奶", "雞肉", "茄子", "九層塔"] },
-            { id: 23, category: "異國料理", name: "韓式炸雞", image: "images/korean_chicken.jpg", ingredients: ["雞翅", "韓式辣醬", "番茄醬", "蒜末", "炸粉"] },
-            { id: 24, category: "異國料理", name: "韓式泡菜鍋", image: "images/kimchi_pot.jpg", ingredients: ["泡菜", "豬肉片", "豆腐", "金針菇", "韓式辣醬"] },
-            { id: 25, category: "異國料理", name: "日式豚骨拉麵", image: "images/ramen.jpg", ingredients: ["拉麵", "叉燒肉", "筍乾", "溏心蛋", "海苔"] },
-            { id: 26, category: "異國料理", name: "日式鮭魚味噌湯", image: "images/miso_soup.jpg", ingredients: ["鮭魚", "味噌", "豆腐", "海帶芽", "蔥花"] },
+            // --- 異國料理 (Exotic) ---
+            { id: 20, category: "異國料理", name: "肉骨茶", image: "https://loremflickr.com/300/200/bak,kut,teh/all", ingredients: ["排骨", "蒜頭", "肉骨茶包", "醬油", "白胡椒"] },
+            { id: 21, category: "異國料理", name: "打拋豬", image: "https://loremflickr.com/300/200/thai,basil,pork/all", ingredients: ["豬絞肉", "九層塔", "辣椒", "蒜頭", "魚露", "檸檬"] },
+            { id: 22, category: "異國料理", name: "泰式綠咖哩雞", image: "https://loremflickr.com/300/200/green,curry/all", ingredients: ["綠咖哩醬", "椰奶", "雞肉", "茄子", "九層塔"] },
+            { id: 23, category: "異國料理", name: "韓式炸雞", image: "https://loremflickr.com/300/200/korean,fried,chicken/all", ingredients: ["雞翅", "韓式辣醬", "番茄醬", "蒜末", "炸粉"] },
+            { id: 24, category: "異國料理", name: "韓式泡菜鍋", image: "https://loremflickr.com/300/200/kimchi,stew/all", ingredients: ["泡菜", "豬肉片", "豆腐", "金針菇", "韓式辣醬"] },
+            { id: 25, category: "異國料理", name: "日式豚骨拉麵", image: "https://loremflickr.com/300/200/ramen/all", ingredients: ["拉麵", "叉燒肉", "筍乾", "溏心蛋", "海苔"] },
+            { id: 26, category: "異國料理", name: "日式鮭魚味噌湯", image: "https://loremflickr.com/300/200/miso,soup,salmon/all", ingredients: ["鮭魚", "味噌", "豆腐", "海帶芽", "蔥花"] },
 
-            // 西式料理
-            { id: 30, category: "西式料理", name: "西班牙海鮮燉飯", image: "images/paella.jpg", ingredients: ["米", "蝦子", "蛤蜊", "番紅花", "甜椒", "雞高湯"] },
-            { id: 31, category: "西式料理", name: "義大利麵", image: "images/pasta.jpg", ingredients: ["義大利麵", "橄欖油", "蒜片", "辣椒", "培根"] },
-            { id: 32, category: "西式料理", name: "奶油蘑菇濃湯", image: "images/mushroom_soup.jpg", ingredients: ["蘑菇", "洋蔥", "鮮奶油", "奶油", "麵粉"] },
-            { id: 33, category: "西式料理", name: "南瓜雞肉燉飯", image: "images/pumpkin_risotto.jpg", ingredients: ["南瓜", "雞肉", "米", "起司", "洋蔥"] },
-            { id: 34, category: "西式料理", name: "香煎馬鈴薯雞肉", image: "images/potato_chicken.jpg", ingredients: ["雞腿肉", "馬鈴薯", "迷迭香", "蒜頭", "黑胡椒"] },
+            // --- 西式料理 (Western) ---
+            { id: 30, category: "西式料理", name: "西班牙海鮮燉飯", image: "https://loremflickr.com/300/200/paella/all", ingredients: ["米", "蝦子", "蛤蜊", "番紅花", "甜椒", "雞高湯"] },
+            { id: 31, category: "西式料理", name: "義大利麵", image: "https://loremflickr.com/300/200/spaghetti/all", ingredients: ["義大利麵", "橄欖油", "蒜片", "辣椒", "培根"] },
+            { id: 32, category: "西式料理", name: "奶油蘑菇濃湯", image: "https://loremflickr.com/300/200/mushroom,soup/all", ingredients: ["蘑菇", "洋蔥", "鮮奶油", "奶油", "麵粉"] },
+            { id: 33, category: "西式料理", name: "南瓜雞肉燉飯", image: "https://loremflickr.com/300/200/pumpkin,risotto/all", ingredients: ["南瓜", "雞肉", "米", "起司", "洋蔥"] },
+            { id: 34, category: "西式料理", name: "香煎馬鈴薯雞肉", image: "https://loremflickr.com/300/200/roasted,chicken,potato/all", ingredients: ["雞腿肉", "馬鈴薯", "迷迭香", "蒜頭", "黑胡椒"] },
 
-            // 家常菜
-            { id: 40, category: "家常菜", name: "牛肉丼飯", image: "images/beef_don.jpg", ingredients: ["牛肉片", "洋蔥", "醬油", "味醂", "雞蛋"] },
-            { id: 41, category: "家常菜", name: "親子丼", image: "images/oyako_don.jpg", ingredients: ["雞肉", "雞蛋", "洋蔥", "柴魚醬油"] },
-            { id: 42, category: "家常菜", name: "滷肉飯", image: "images/braised_pork.jpg", ingredients: ["五花絞肉", "紅蔥頭", "醬油", "冰糖", "五香粉"] },
-            { id: 43, category: "家常菜", name: "番茄燉牛肉", image: "images/tomato_beef.jpg", ingredients: ["牛肋條", "番茄", "洋蔥", "紅蘿蔔", "月桂葉"] },
-            { id: 44, category: "家常菜", name: "剝皮辣椒雞湯", image: "images/chili_chicken.jpg", ingredients: ["雞腿肉", "剝皮辣椒", "薑片", "蛤蜊"] },
-            { id: 45, category: "家常菜", name: "麻油蛋麵線", image: "images/sesame_noodle.jpg", ingredients: ["麵線", "雞蛋", "黑麻油", "老薑"] },
-            { id: 46, category: "家常菜", name: "麻辣鴨血豆腐", image: "images/spicy_duck_blood.jpg", ingredients: ["鴨血", "豆腐", "麻辣湯底", "酸菜", "蒜苗"] },
-            { id: 47, category: "家常菜", name: "日式蒸蛋豆腐", image: "images/steamed_egg.jpg", ingredients: ["雞蛋", "嫩豆腐", "柴魚高湯", "蝦仁"] },
+            // --- 家常菜 (Home-style) ---
+            { id: 40, category: "家常菜", name: "牛肉丼飯", image: "https://loremflickr.com/300/200/gyudon/all", ingredients: ["牛肉片", "洋蔥", "醬油", "味醂", "雞蛋"] },
+            { id: 41, category: "家常菜", name: "親子丼", image: "https://loremflickr.com/300/200/oyakodon/all", ingredients: ["雞肉", "雞蛋", "洋蔥", "柴魚醬油"] },
+            { id: 42, category: "家常菜", name: "滷肉飯", image: "https://loremflickr.com/300/200/braised,pork,rice/all", ingredients: ["五花絞肉", "紅蔥頭", "醬油", "冰糖", "五香粉"] },
+            { id: 43, category: "家常菜", name: "番茄燉牛肉", image: "https://loremflickr.com/300/200/tomato,beef,stew/all", ingredients: ["牛肋條", "番茄", "洋蔥", "紅蘿蔔", "月桂葉"] },
+            { id: 44, category: "家常菜", name: "剝皮辣椒雞湯", image: "https://loremflickr.com/300/200/chicken,soup,chili/all", ingredients: ["雞腿肉", "剝皮辣椒", "薑片", "蛤蜊"] },
+            { id: 45, category: "家常菜", name: "麻油蛋麵線", image: "https://loremflickr.com/300/200/sesame,oil,noodles/all", ingredients: ["麵線", "雞蛋", "黑麻油", "老薑"] },
+            { id: 46, category: "家常菜", name: "麻辣鴨血豆腐", image: "https://loremflickr.com/300/200/spicy,hotpot/all", ingredients: ["鴨血", "豆腐", "麻辣湯底", "酸菜", "蒜苗"] },
+            { id: 47, category: "家常菜", name: "日式蒸蛋豆腐", image: "https://loremflickr.com/300/200/steamed,egg/all", ingredients: ["雞蛋", "嫩豆腐", "柴魚高湯", "蝦仁"] },
+            { id: 48, category: "家常菜", name: "滷味拼盤", image: "https://loremflickr.com/300/200/braised,dishes/all", ingredients: ["豆乾", "海帶", "滷蛋", "豬耳朵", "醬油"] },
 
-            // 健康料理
-            { id: 50, category: "健康料理", name: "生菜沙拉", image: "images/salad.jpg", ingredients: ["生菜", "小番茄", "雞胸肉", "玉米", "和風醬"] },
-            { id: 51, category: "健康料理", name: "香煎雞胸肉", image: "images/chicken_breast.jpg", ingredients: ["雞胸肉", "義式香料", "黑胡椒", "橄欖油"] },
-            { id: 52, category: "健康料理", name: "氣炸雞塊(自製)", image: "images/nuggets.jpg", ingredients: ["雞絞肉", "豆腐", "蒜粉", "胡椒鹽"] },
-            { id: 53, category: "健康料理", name: "氣炸地瓜條", image: "images/sweet_potato.jpg", ingredients: ["地瓜", "橄欖油", "梅子粉"] },
+            // --- 健康料理 (Healthy) ---
+            { id: 50, category: "健康料理", name: "生菜沙拉", image: "https://loremflickr.com/300/200/salad/all", ingredients: ["生菜", "小番茄", "雞胸肉", "玉米", "和風醬"] },
+            { id: 51, category: "健康料理", name: "香煎雞胸肉", image: "https://loremflickr.com/300/200/grilled,chicken,breast/all", ingredients: ["雞胸肉", "義式香料", "黑胡椒", "橄欖油"] },
+            { id: 52, category: "健康料理", name: "氣炸雞塊(自製)", image: "https://loremflickr.com/300/200/chicken,nuggets/all", ingredients: ["雞絞肉", "豆腐", "蒜粉", "胡椒鹽"] },
+            { id: 53, category: "健康料理", name: "氣炸地瓜條", image: "https://loremflickr.com/300/200/sweet,potato,fries/all", ingredients: ["地瓜", "橄欖油", "梅子粉"] },
+            { id: 54, category: "健康料理", name: "氣炸薯條", image: "https://loremflickr.com/300/200/french,fries/all", ingredients: ["馬鈴薯", "橄欖油", "鹽"] },
 
-            // 熱炒
-            { id: 60, category: "熱炒", name: "炒青菜", image: "images/veggie.jpg", ingredients: ["當季青菜", "蒜頭", "鹽"] },
-            { id: 61, category: "熱炒", name: "蔥爆牛肉", image: "images/green_onion_beef.jpg", ingredients: ["牛肉片", "大量蔥段", "辣椒", "醬油", "米酒"] },
-            { id: 62, category: "熱炒", name: "醬燒豆腐", image: "images/tofu_soy.jpg", ingredients: ["板豆腐", "醬油", "蔥", "糖"] },
-            { id: 63, category: "熱炒", name: "水蓮炒蛋", image: "images/water_lily.jpg", ingredients: ["水蓮", "雞蛋", "蒜頭", "破布子"] },
-            { id: 64, category: "熱炒", name: "金沙豆腐", image: "images/salted_egg_tofu.jpg", ingredients: ["雞蛋豆腐", "鹹蛋黃", "蔥花", "辣椒"] },
-            { id: 65, category: "熱炒", name: "番茄炒蛋", image: "images/tomato_egg_fry.jpg", ingredients: ["番茄", "雞蛋", "蔥花", "番茄醬"] },
-            { id: 66, category: "熱炒", name: "香煎鮭魚", image: "images/salmon.jpg", ingredients: ["鮭魚排", "鹽", "檸檬", "黑胡椒"] },
-            { id: 67, category: "熱炒", name: "九層塔炒蛤蜊", image: "images/clams.jpg", ingredients: ["蛤蜊", "九層塔", "蒜頭", "辣椒", "米酒"] },
-            { id: 68, category: "熱炒", name: "麻婆豆腐", image: "images/mapo_tofu.jpg", ingredients: ["嫩豆腐", "絞肉", "豆瓣醬", "花椒油"] },
-            { id: 69, category: "熱炒", name: "胡椒蝦", image: "images/pepper_shrimp.jpg", ingredients: ["蝦子", "白胡椒粉", "米酒", "鹽", "蒜頭"] },
+            // --- 熱炒 (Stir-fry) ---
+            { id: 60, category: "熱炒", name: "炒青菜", image: "https://loremflickr.com/300/200/stir,fry,vegetable/all", ingredients: ["當季青菜", "蒜頭", "鹽"] },
+            { id: 61, category: "熱炒", name: "蔥爆牛肉", image: "https://loremflickr.com/300/200/beef,scallion/all", ingredients: ["牛肉片", "大量蔥段", "辣椒", "醬油", "米酒"] },
+            { id: 62, category: "熱炒", name: "醬燒豆腐", image: "https://loremflickr.com/300/200/braised,tofu/all", ingredients: ["板豆腐", "醬油", "蔥", "糖"] },
+            { id: 63, category: "熱炒", name: "水蓮炒蛋", image: "https://loremflickr.com/300/200/vegetable,stir,fry/all", ingredients: ["水蓮", "雞蛋", "蒜頭", "破布子"] },
+            { id: 64, category: "熱炒", name: "金沙豆腐", image: "https://loremflickr.com/300/200/tofu,fried/all", ingredients: ["雞蛋豆腐", "鹹蛋黃", "蔥花", "辣椒"] },
+            { id: 65, category: "熱炒", name: "番茄炒蛋", image: "https://loremflickr.com/300/200/tomato,eggs/all", ingredients: ["番茄", "雞蛋", "蔥花", "番茄醬"] },
+            { id: 66, category: "熱炒", name: "香煎鮭魚", image: "https://loremflickr.com/300/200/grilled,salmon/all", ingredients: ["鮭魚排", "鹽", "檸檬", "黑胡椒"] },
+            { id: 67, category: "熱炒", name: "九層塔炒蛤蜊", image: "https://loremflickr.com/300/200/clams,basil/all", ingredients: ["蛤蜊", "九層塔", "蒜頭", "辣椒", "米酒"] },
+            { id: 68, category: "熱炒", name: "麻婆豆腐", image: "https://loremflickr.com/300/200/mapo,tofu/all", ingredients: ["嫩豆腐", "絞肉", "豆瓣醬", "花椒油"] },
+            { id: 69, category: "熱炒", name: "胡椒蝦", image: "https://loremflickr.com/300/200/shrimp,pepper/all", ingredients: ["蝦子", "白胡椒粉", "米酒", "鹽", "蒜頭"] },
 
-            // 小吃/早午餐
-            { id: 70, category: "小吃/早午餐", name: "蔥油餅", image: "images/scallion_pancake.jpg", ingredients: ["麵粉", "蔥花", "豬油", "椒鹽粉"] },
-            { id: 71, category: "小吃/早午餐", name: "玉子燒", image: "images/tamagoyaki.jpg", ingredients: ["雞蛋", "牛奶", "味醂", "糖"] },
-            { id: 72, category: "小吃/早午餐", name: "蛋餅", image: "images/egg_roll.jpg", ingredients: ["蛋餅皮", "雞蛋", "鮪魚/玉米/起司"] },
-            { id: 73, category: "小吃/早午餐", name: "法式吐司", image: "images/french_toast.jpg", ingredients: ["厚片吐司", "雞蛋", "牛奶", "奶油", "蜂蜜"] },
-            { id: 74, category: "小吃/早午餐", name: "水餃", image: "images/dumplings.jpg", ingredients: ["水餃", "醬油", "香油"] },
-            { id: 75, category: "小吃/早午餐", name: "煎餃", image: "images/fried_dumplings.jpg", ingredients: ["水餃", "麵粉水", "油"] },
-            { id: 76, category: "小吃/早午餐", name: "炒泡麵", image: "images/fried_noodles.jpg", ingredients: ["泡麵", "高麗菜", "雞蛋", "肉片"] },
-            { id: 77, category: "小吃/早午餐", name: "鍋燒意麵", image: "images/pot_noodles.jpg", ingredients: ["意麵", "蝦子", "蛤蜊", "雞蛋", "沙茶醬"] },
-            { id: 78, category: "小吃/早午餐", name: "清粥小菜", image: "images/congee.jpg", ingredients: ["白米/地瓜", "肉鬆", "醬瓜", "麵筋"] }
+            // --- 小吃/早午餐 (Snacks) ---
+            { id: 70, category: "小吃/早午餐", name: "蔥油餅", image: "https://loremflickr.com/300/200/scallion,pancake/all", ingredients: ["麵粉", "蔥花", "豬油", "椒鹽粉"] },
+            { id: 71, category: "小吃/早午餐", name: "玉子燒", image: "https://loremflickr.com/300/200/tamagoyaki/all", ingredients: ["雞蛋", "牛奶", "味醂", "糖"] },
+            { id: 72, category: "小吃/早午餐", name: "蛋餅", image: "https://loremflickr.com/300/200/egg,crepe/all", ingredients: ["蛋餅皮", "雞蛋", "鮪魚/玉米/起司"] },
+            { id: 73, category: "小吃/早午餐", name: "法式吐司", image: "https://loremflickr.com/300/200/french,toast/all", ingredients: ["厚片吐司", "雞蛋", "牛奶", "奶油", "蜂蜜"] },
+            { id: 74, category: "小吃/早午餐", name: "水餃", image: "https://loremflickr.com/300/200/dumplings/all", ingredients: ["水餃", "醬油", "香油"] },
+            { id: 75, category: "小吃/早午餐", name: "煎餃", image: "https://loremflickr.com/300/200/potstickers/all", ingredients: ["水餃", "麵粉水", "油"] },
+            { id: 76, category: "小吃/早午餐", name: "炒泡麵", image: "https://loremflickr.com/300/200/fried,noodles/all", ingredients: ["泡麵", "高麗菜", "雞蛋", "肉片"] },
+            { id: 77, category: "小吃/早午餐", name: "鍋燒意麵", image: "https://loremflickr.com/300/200/seafood,noodle,soup/all", ingredients: ["意麵", "蝦子", "蛤蜊", "雞蛋", "沙茶醬"] },
+            { id: 78, category: "小吃/早午餐", name: "清粥小菜", image: "https://loremflickr.com/300/200/congee/all", ingredients: ["白米/地瓜", "肉鬆", "醬瓜", "麵筋"] },
+            { id: 79, category: "小吃/早午餐", name: "烤玉米", image: "https://loremflickr.com/300/200/grilled,corn/all", ingredients: ["玉米", "沙茶醬", "醬油"] },
+            { id: 80, category: "小吃/早午餐", name: "豬肉鬆餅堡", image: "https://loremflickr.com/300/200/muffin,burger/all", ingredients: ["滿福堡", "豬肉排", "起司", "雞蛋"] },
+            { id: 81, category: "小吃/早午餐", name: "地瓜球", image: "https://loremflickr.com/300/200/sweet,potato,balls/all", ingredients: ["地瓜", "地瓜粉", "糖"] }
         ];
-
         /* --- 邏輯區 --- */
         const menuContainer = document.getElementById('menuContainer');
         const categoryContainer = document.getElementById('categoryContainer');
@@ -286,3 +290,4 @@
     </script>
 </body>
 </html>
+
