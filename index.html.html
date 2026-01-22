@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的私房菜單 App v2.0</title>
+    <style>
+        /* --- CSS 外觀設計區 --- */
+        
+        body {
+            font-family: "微軟正黑體", sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 頂部導覽列設計 */
+        .header {
+            display: flex;
+            align-items: center; /* 垂直置中 */
+            justify-content: space-between; /* 左右撐開 */
+            margin-bottom: 15px;
+        }
+
+        /* 房子按鈕 (回主頁) */
+        .home-btn {
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+            background: white;
+            border-radius: 50%; /* 圓形 */
+            width: 40px; height: 40px;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .home-btn:active { transform: scale(0.9); } /* 點下去縮小一點的效果 */
+
+        h1 { margin: 0; font-size: 22px; color: #333; flex-grow: 1; text-align: center; }
+
+        /* 搜尋框設計 */
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .search-input:focus { border-color: #4CAF50; }
+
+        /* 分類按鈕區 */
+        .filter-bar {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn.active, .btn:hover { background-color: #ff9800; color: white; border-color: #ff9800; }
+
+        /* 卡片列表區 */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: white; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-img { width: 100%; height: 120px; background-color: #eee; object-fit: cover; }
+        .card-body { padding: 10px; }
+        .card-title { margin: 0; font-size: 16px; font-weight: bold; }
+        .card-tag { font-size: 12px; color: #888; margin-top: 5px; }
+
+        /* 彈出視窗 */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal-content {
+            background: white; width: 90%; max-width: 400px; border-radius: 15px; padding: 20px; position: relative;
+        }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #aaa; }
+        .ingredient-tag {
+            display: inline-block; background: #e0f7fa; color: #006064; padding: 5px 10px;
+            border-radius: 5px; margin: 5px 5px 0 0; font-size: 14px; cursor: pointer; text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="home-btn" onclick="goHome()">🏠</div> 
+        <h1 id="pageTitle">今天吃什麼？</h1>
+        <div style="width: 40px;"></div> </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜尋菜名、食材 (例如: 蛋)..." oninput="searchMenu(this.value)">
+    </div>
+
+    <div class="filter-bar">
+        <button class="btn active" onclick="filterMenu('all')">全部</button>
+        <button class="btn" onclick="filterMenu('中式')">中式</button>
+        <button class="btn" onclick="filterMenu('西式')">西式</button>
+        <button class="btn" onclick="filterMenu('韓式')">韓式</button>
+        <button class="btn" onclick="filterMenu('甜點')">甜點</button>
+    </div>
+
+    <div class="menu-grid" id="menuContainer"></div>
+
+    <div class="modal-overlay" id="detailModal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('detailModal').style.display='none'">&times;</span>
+            <h2 id="modalTitle">菜名</h2>
+            <img id="modalImg" src="" style="width:100%; border-radius:10px; margin-bottom:10px;">
+            <p><strong>分類：</strong><span id="modalCategory"></span></p>
+            <p><strong>食材 (點擊可搜尋)：</strong></p>
+            <div id="modalIngredients"></div>
+            <br>
+            <button class="btn" style="width:100%; background:#4CAF50; color:white;" onclick="alert('連結 Google 地圖功能待開發！')">📍 去哪裡買/吃？</button>
+        </div>
+    </div>
+
+    <script>
+        /* --- 資料庫區 --- */
+        const menuData = [
+            { id: 1, name: "韓式部隊鍋", category: "韓式", image: "https://placehold.co/300x200/ffcccc/333?text=部隊鍋", ingredients: ["泡菜", "豆腐", "午餐肉", "起司", "拉麵"] },
+            { id: 2, name: "麻婆豆腐", category: "中式", image: "https://placehold.co/300x200/cc0000/fff?text=麻婆豆腐", ingredients: ["豆腐", "絞肉", "豆瓣醬", "蔥"] },
+            { id: 3, name: "奶油培根義大利麵", category: "西式", image: "https://placehold.co/300x200/ffffcc/333?text=義大利麵", ingredients: ["義大利麵", "培根", "雞蛋", "鮮奶油"] },
+            { id: 4, name: "草莓大福", category: "甜點", image: "https://placehold.co/300x200/ff99cc/fff?text=草莓大福", ingredients: ["草莓", "糯米粉", "紅豆泥"] },
+            { id: 5, name: "泡菜炒飯", category: "韓式", image: "https://placehold.co/300x200/ff6600/fff?text=泡菜炒飯", ingredients: ["白飯", "泡菜", "雞蛋", "海苔"] }
+        ];
+
+        /* --- 邏輯區 --- */
+        const menuContainer = document.getElementById('menuContainer');
+        const pageTitle = document.getElementById('pageTitle');
+        const searchInput = document.getElementById('searchInput');
+
+        // 啟動時顯示所有
+        renderMenu(menuData);
+
+        // 顯示菜單函式
+        function renderMenu(data) {
+            menuContainer.innerHTML = "";
+            if(data.length === 0) {
+                menuContainer.innerHTML = "<p style='text-align:center; width:100%; color:#888;'>找不到相關料理，換個關鍵字試試？</p>";
+                return;
+            }
+            data.forEach(item => {
+                const cardHTML = `
+                    <div class="card" onclick="showDetail(${item.id})">
+                        <img src="${item.image}" class="card-img">
+                        <div class="card-body">
+                            <div class="card-title">${item.name}</div>
+                            <div class="card-tag">#${item.category}</div>
+                        </div>
+                    </div>`;
+                menuContainer.innerHTML += cardHTML;
+            });
+        }
+
+        // --- 新增功能：搜尋 ---
+        function searchMenu(keyword) {
+            // 把輸入的字變小寫 (比較好比對)
+            const lowerKeyword = keyword.toLowerCase().trim();
+
+            if (!lowerKeyword) {
+                renderMenu(menuData); // 如果沒打字，顯示全部
+                return;
+            }
+
+            // 過濾邏輯：只要 (菜名有包含) 或者 (食材清單裡有包含)
+            const filtered = menuData.filter(item => {
+                const matchName = item.name.toLowerCase().includes(lowerKeyword);
+                const matchIngredient = item.ingredients.some(ing => ing.toLowerCase().includes(lowerKeyword));
+                return matchName || matchIngredient;
+            });
+
+            renderMenu(filtered);
+        }
+
+        // --- 新增功能：回主頁 (房子按鈕) ---
+        function goHome() {
+            renderMenu(menuData); // 顯示所有資料
+            pageTitle.innerText = "今天吃什麼？"; // 標題改回來
+            searchInput.value = ""; // 清空搜尋框
+            
+            // 把所有分類按鈕的 active 樣式去掉，只留給「全部」
+            document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.btn').classList.add('active'); // 假設第一個按鈕是「全部」
+        }
+
+        // 分類篩選
+        function filterMenu(category) {
+            // 清空搜尋框，避免混淆
+            searchInput.value = "";
+            
+            if (category === 'all') {
+                renderMenu(menuData);
+            } else {
+                const filtered = menuData.filter(item => item.category === category);
+                renderMenu(filtered);
+            }
+        }
+
+        // 詳細視窗相關
+        function showDetail(id) {
+            const item = menuData.find(d => d.id === id);
+            document.getElementById('modalTitle').innerText = item.name;
+            document.getElementById('modalImg').src = item.image;
+            document.getElementById('modalCategory').innerText = item.category;
+            
+            const ingArea = document.getElementById('modalIngredients');
+            ingArea.innerHTML = "";
+            item.ingredients.forEach(ing => {
+                ingArea.innerHTML += `<span class="ingredient-tag" onclick="searchIngredient('${ing}')">${ing}</span>`;
+            });
+            document.getElementById('detailModal').style.display = 'flex';
+        }
+
+        function searchIngredient(ingredientName) {
+            document.getElementById('detailModal').style.display = 'none';
+            
+            // 把食材名稱填入搜尋框，觸發搜尋
+            searchInput.value = ingredientName;
+            searchMenu(ingredientName);
+            
+            pageTitle.innerText = `🔍 包含「${ingredientName}」的料理`;
+        }
+
+        function closeModal(e) {
+            if (e.target.id === 'detailModal') e.target.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
