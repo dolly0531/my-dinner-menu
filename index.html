@@ -246,24 +246,25 @@
             document.getElementById('modalImg').onerror = function() { this.src = `https://placehold.co/300x200?text=${item.name}`; };
             document.getElementById('modalCategory').innerText = item.category;
             
-            // 渲染食材
-            const ingArea = document.getElementById('modalIngredients');
-            ingArea.innerHTML = item.ingredients.map(ing => 
-                `<span class="ingredient-tag" onclick="searchIngredient('${ing}')">${ing}</span>`
-            ).join('');
-
-            // --- 重點更新：自動產生多個按鈕 ---
-            const actionArea = document.getElementById('modalActions');
-            actionArea.innerHTML = `
-                <a href="https://www.youtube.com/results?search_query=${item.name}+做法" target="_blank" class="action-btn btn-youtube">
-                    📺 看 YouTube 教學
-                </a>
-                <a href="https://www.google.com/search?q=${item.name}+食譜" target="_blank" class="action-btn btn-recipe">
-                    📖 搜尋食譜 (愛料理/Cookpad)
-                </a>
-            `;
-
-            document.getElementById('detailModal').style.display = 'flex';
+            // 渲染菜單
+        function renderMenu(data) {
+            menuContainer.innerHTML = "";
+            if(data.length === 0) {
+                menuContainer.innerHTML = "<p style='text-align:center; width:100%; color:#888;'>找不到相關料理，換個關鍵字試試？</p>";
+                return;
+            }
+            data.forEach(item => {
+                // 這裡我們新增了顯示時間的程式碼 (⏱️ item.time)
+                const cardHTML = `
+                    <div class="card" onclick="showDetail(${item.id})">
+                        <img src="${item.image}" class="card-img" onerror="this.src='https://placehold.co/300x200?text=${item.name}'">
+                        <div class="card-body">
+                            <div class="card-title">${item.name}</div>
+                            <div class="card-tag">#${item.category} &nbsp; ⏱️${item.time}</div>
+                        </div>
+                    </div>`;
+                menuContainer.innerHTML += cardHTML;
+            });
         }
 
         // 反向搜尋食材
@@ -285,6 +286,7 @@
     </script>
 </body>
 </html>
+
 
 
 
